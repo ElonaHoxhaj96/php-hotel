@@ -52,37 +52,31 @@
 </head>
 <body>
     <section class="container">
-        <div class="row">
+      
         <table class="table">
             <thead>
                 <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Descrizione<th>
-                <th scope="col">Parcheggio</th>
-                <th scope="col">Voto</th>
-                <th scope="col">Distanza dal centro</th>
+                    <th> Name</th>
+                    <th>Descrizione</th>
+                    <th>Parcheggio</th>
+                    <th>Voto</th>
+                    <th>Distanza dal centro</th>
+                
                 </tr>
             </thead>
             <tbody>
                 <?php foreach($hotels as $hotel_name): ?>
                     <tr>
-                    <th><?php echo $hotel_name['name'] ?></th>
+                        <th><?php echo $hotel_name['name'] ?></th>
+                        <td><?php echo $hotel_name['description'] ?></td> 
+                        <td><?php echo $hotel_name['parking'] ?></td>
+                        <td><?php echo $hotel_name['vote'] ?></td>
+                        <td><?php echo $hotel_name['distance_to_center'] ?></td>
                     </tr>
                 <?php endforeach?>
-                <!-- <tr>
-                <th>2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-                </tr>
-                <tr>
-                <th>3</th>
-                <td colspan="2">Larry the Bird</td>
-                <td>@twitter</td>
-                </tr> -->
             </tbody>
         </table>
-        </div>
+      
     </section>
     
 </body>
