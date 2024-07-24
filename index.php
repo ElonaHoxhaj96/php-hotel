@@ -37,6 +37,18 @@ $hotels = [
         'distance_to_center' => 50
     ],
 ];
+
+// Filtro gli hotel in base alla richiesta GET per i parcheggi 
+$filter_parking = isset($_GET['parking']) ? $_GET['parking'] : 'all';
+
+$filtered_hotels = [];
+foreach ($hotels as $hotel) {
+    if ($filter_parking === 'yes' && !$hotel['parking']) {
+        continue;
+    }
+    $filtered_hotels[] = $hotel;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -49,8 +61,24 @@ $hotels = [
 </head>
 <body>
     <section class="container mt-5">  
-        <h1>PHP Hotel</h1>    
-        <table class="table">
+        <h1>PHP Hotel</h1>
+        
+        <form action="index.php" method="GET">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="parking" id="parkingAll" value="all" <?php echo $filter_parking === 'all' ? 'checked' : ''; ?> onchange="this.form.submit();">
+                <label class="form-check-label" for="parkingAll">
+                   Tutti gli hotel
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="parking" id="parkingYes" value="yes" <?php echo $filter_parking === 'yes' ? 'checked' : ''; ?> onchange="this.form.submit();">
+                <label class="form-check-label" for="parkingYes">
+                   Solo con parcheggio 
+                </label>
+            </div>
+        </form>
+
+        <table class="table mt-4">
             <thead>
                 <tr>
                     <th>Name</th>
@@ -61,7 +89,7 @@ $hotels = [
                 </tr>
             </thead>
             <tbody>
-                <?php foreach($hotels as $hotel): ?>
+                <?php foreach($filtered_hotels as $hotel): ?>
                     <tr>
                         <th><?php echo $hotel['name']; ?></th>
                         <td><?php echo $hotel['description']; ?></td> 
